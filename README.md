@@ -1,81 +1,45 @@
-![pixi.js logo](https://pixijs.download/pixijs-banner-no-version.png?v=1)
+# Multiple Challenge Run Organizer - MCRO
 
-The aim of this project is to provide a fast lightweight 2D library that works
-across all devices. The PixiJS renderer allows everyone to enjoy the power of
-hardware acceleration without prior knowledge of WebGL. Also, it's fast. Really fast.
+Currently being developed by one developer. Below you'll have a short description of the tool, its use and some planned features.
+- MCRO is being primarily designed for challenge runners that stream their misfortune to a live audience.
+- MCRO was designed to be captured in OBS and placed above existing splits.
+- MCRO is meant to ease the organization of multiple games that need to be completed in order to complete a run.
+- Streamers usually do this by having some photoshop templates that they edit everytime they complete a game (no-hit runners especially, as speedrunners do not bother with this because it is tedious and they just tend to plop every split into a huge list and it looks terrible).
 
-**We are now a part of the [Open Collective](https://opencollective.com/pixijs) and with your support you can help us make PixiJS even better. To make a donation, simply click the button below and we'll love you forever!**
+# Demonstration
+There are two main modes of the application: Classic mode and Moden mode.
+**Classic Mode** features only rectangular shapes for displaying runs that have borders. The colors of the borders, backgrounds and fonts can be fully customizable. The size parameters can also be changed, but bear in mind that this is a global effect and it will apply to all runs.
 
-<div align="center">
-  <a href="https://opencollective.com/pixijs/donate" target="_blank">
-    <img src="https://opencollective.com/pixijs/donate/button@2x.png?color=blue" width=250 />
-  </a>
-</div>
+With **Modern Mode** you can attach any image in place of the default ones that will represent the pending, in progress and finished runs. This mode was designed with the idea in mind that all runs will still have the same Width and Height, ensuring the best possible **alignment** and **quality**. MCRO will allow the addition of inconsistent image resolutions, but be warned that the results may not be good looking and the workflow might be buggy.
 
-### Setup
+Each run has **3** possible states it can be in:
+- Pending: the run has not been started yet; it is marked with the color **red** by default.
+- In Progress: the currently active run, the game that you are playing at this moment; it is marked with the color **yellow** by default.
+- Finished: the run has already been completed; it is marked with the color **green** by default.
 
-PixiJS can be installed with [npm](https://docs.npmjs.com/getting-started/what-is-npm) to integrate with [Webpack](https://webpack.js.org/), [Browserify](http://browserify.org/), [Rollup](https://rollupjs.org/), [Electron](https://electron.atom.io/), [NW.js](https://nwjs.io/) or other module backed environments.
+### Run manipulation: adding, deleting, renaming and moving runs around
+![RunManipulation](https://user-images.githubusercontent.com/63927668/178163180-14c89f91-1f21-405c-9a83-d4ffac0e946c.gif)
 
-#### Install
+### Editing the size of the runs
+![EditRunSize](https://user-images.githubusercontent.com/63927668/178163208-dce7bb4b-c178-4fc5-9263-219cc52faa0a.gif)
 
-```
-npm install pixi.js
-```
+Edit the width, height and spacing for each run. Each of these parameters are computed to work within a range (based on the other parameters and the width of the window).
 
-There is no default export. The correct way to import PixiJS is:
+### Setting a logo for a run
+![SetRunLogo](https://user-images.githubusercontent.com/63927668/178163235-59796ae1-0d27-4c0b-9f7d-c744dc87b1b2.gif)
 
-```js
-import * as PIXI from 'pixi.js';
-```
+Logos must be properly dimensioned beforehand, you will not be able to resize them in the application currently.
 
-#### CDN Install
+### Setting a background for the application:
+Right click to bring up the global run settings and select "Change background image".
 
-Via jsDelivr:
+### Modern Design Workflow
+![ModernMode](https://user-images.githubusercontent.com/63927668/179598147-ccb8940c-640a-4df2-a196-8de5c3d21d12.gif)
 
-```html
-<script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
-```
+### Others
+- You can save the current ChallengeRun as an .MCRO file and Load it the next time you stream. This saves everything you have changed/added in the current template for easy reusability.
+- For OBS users: you can make the application's background transparent by adding a Color Key as an effect on the captured window. Play around with the settings in order to achieve the best result.
 
-Or via unpkg:
-
-```html
-<script src="https://unpkg.com/pixi.js@7.x/dist/pixi.min.js"></script>
-```
-
-### Basic Usage Example
-
-```js
-import { Application, Assets, Sprite } from 'pixi.js';
-
-// The application will create a renderer using WebGL, if possible,
-// with a fallback to a canvas render. It will also setup the ticker
-// and the root stage PIXI.Container
-const app = new Application();
-
-// The application will create a canvas element for you that you
-// can then insert into the DOM
-document.body.appendChild(app.view);
-
-// load the texture we need
-const texture = await Assets.load('bunny.png');
-
-// This creates a texture from a 'bunny.png' image
-const bunny = new Sprite(texture);
-
-// Setup the position of the bunny
-bunny.x = app.renderer.width / 2;
-bunny.y = app.renderer.height / 2;
-
-// Rotate around the center
-bunny.anchor.x = 0.5;
-bunny.anchor.y = 0.5;
-
-// Add the bunny to the scene we are building
-app.stage.addChild(bunny);
-
-// Listen for frame updates
-app.ticker.add(() => {
-    // each frame we spin the bunny around a bit
-    bunny.rotation += 0.01;
-});
-```
+### Future implementations:
+- Classic mode: Transparent backgrounds and borders for the runs - Not difficult to implement.
+- Classic mode: Add new fonts and font sizes - Not difficult to implement.
